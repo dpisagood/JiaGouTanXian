@@ -14,12 +14,12 @@ import java.util.Map;
  * Created by wl on 2016/9/25.
  */
 public class CustomerServiceTest {
-    private final CustomerService customerService;
+    private static final CustomerService  customerService;
 
-    public CustomerServiceTest(CustomerService customerService) {
-        this.customerService = customerService;
+
+    static{
+        customerService=new CustomerService();
     }
-
     @Before
     public  void  init(){
         //TODO 初始化数据库

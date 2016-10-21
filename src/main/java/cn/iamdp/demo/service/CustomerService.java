@@ -1,5 +1,6 @@
 package cn.iamdp.demo.service;
 
+import cn.iamdp.demo.hepler.DatabaceHelper;
 import cn.iamdp.demo.model.Customer;
 
 import java.util.List;
@@ -18,7 +19,8 @@ public class CustomerService {
      * @return
      */
     public List<Customer> getCustomerList(String keyword){
-        return null;
+        String sql="SELECT * FROM customer";
+        return DatabaceHelper.queryEntityList(Customer.class,sql);
     }
 
     /**
@@ -28,7 +30,8 @@ public class CustomerService {
      */
 
     public Customer getCustomer(long id){
-        return null;
+        String sql="SELECT * FROM customer WHERE id=?";
+        return DatabaceHelper.queryEntity(Customer.class,sql,id);
     }
 
     /**
@@ -37,7 +40,7 @@ public class CustomerService {
      * @return
      */
     public boolean createCustomer(Map<String,Object> fieldMap){
-        return true;
+        return DatabaceHelper.insertEntity(Customer.class,fieldMap);
     }
 
     /**
@@ -47,7 +50,7 @@ public class CustomerService {
      * @return
      */
     public boolean updateCustomer(long id ,Map<String,Object> fieldMap){
-        return false;
+        return DatabaceHelper.updateEntity(Customer.class,id,fieldMap);
     }
 
     /**
@@ -56,6 +59,6 @@ public class CustomerService {
      * @return
      */
     public boolean deleteCustomer(long id){
-        return false;
+        return DatabaceHelper.deleteEntity(Customer.class,id);
     }
 }
