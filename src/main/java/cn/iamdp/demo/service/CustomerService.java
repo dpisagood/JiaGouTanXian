@@ -15,10 +15,9 @@ public class CustomerService {
 
     /**
      * 获取用户列表
-     * @param keyword
      * @return
      */
-    public List<Customer> getCustomerList(String keyword){
+    public List<Customer> getCustomerList(){
         String sql="SELECT * FROM customer";
         return DatabaceHelper.queryEntityList(Customer.class,sql);
     }

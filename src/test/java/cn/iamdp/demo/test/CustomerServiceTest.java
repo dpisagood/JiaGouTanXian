@@ -32,7 +32,7 @@ public class CustomerServiceTest {
 
     @Test
     public void getCustomerListTest() throws Exception{
-        List<Customer> customersList =customerService.getCustomerList("");
+        List<Customer> customersList =customerService.getCustomerList();
         Assert.assertEquals(2,customersList.size());//测试里面这个数组里面是不是含有两个值
     }
 
