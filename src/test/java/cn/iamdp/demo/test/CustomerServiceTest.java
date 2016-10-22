@@ -1,5 +1,6 @@
 package cn.iamdp.demo.test;
 
+import cn.iamdp.demo.hepler.DatabaceHelper;
 import cn.iamdp.demo.model.Customer;
 import cn.iamdp.demo.service.CustomerService;
 import org.junit.Assert;
@@ -12,6 +13,8 @@ import java.util.Map;
 
 /**
  * Created by wl on 2016/9/25.
+ * 数据库服务层测试类，通过就近读取test/resources/根目录中的/sql/config_init.properties文件
+ * 即测试数据库配置文件，进行数据库测试
  */
 public class CustomerServiceTest {
     private static final CustomerService  customerService;
@@ -21,8 +24,10 @@ public class CustomerServiceTest {
         customerService=new CustomerService();
     }
     @Before
-    public  void  init(){
+    public  void  init(){//测试之前初始化数据库将这个数据库文件进行执行后，测试数据库就会变回原来的样子
         //TODO 初始化数据库
+        DatabaceHelper.executeSqlFile("sql/customer_init.sql");
+
     }
 
     @Test
