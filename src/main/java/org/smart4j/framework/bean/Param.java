@@ -7,6 +7,10 @@ import java.util.Map;
 /**
  * Created by DP on 2016/10/28.
  */
+
+/**
+ * 参数对象，里面含有参数名和参数的map
+ */
 public class Param {
 
     private Map<String,Object> paramMap;

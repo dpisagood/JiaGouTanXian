@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 
 /**
  * Created by DP on 2016/10/27.
+ * 反射操作工具类
  */
 public final class ReflectionUtil {
     private static final Logger LOGGER= LoggerFactory.getLogger(ReflectionUtil.class);
