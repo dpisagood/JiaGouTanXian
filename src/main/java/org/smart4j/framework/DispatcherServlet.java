@@ -2,7 +2,6 @@ package org.smart4j.framework;
 
 
 
-import org.apache.commons.collections4.keyvalue.AbstractMapEntry;
 import org.apache.commons.lang3.StringUtils;
 import org.smart4j.framework.bean.Data;
 import org.smart4j.framework.bean.Handler;
@@ -12,7 +11,6 @@ import org.smart4j.framework.helper.BeanHelper;
 import org.smart4j.framework.helper.ConfigHelper;
 import org.smart4j.framework.helper.ControllerHelper;
 import org.smart4j.framework.utils.*;
-import sun.reflect.generics.scope.MethodScope;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
@@ -110,16 +108,16 @@ public class DispatcherServlet extends HttpServlet {
                     }
                 }
 
-            }else if (result instanceof Data){
+            }else if (result instanceof Data){//返回java数据，POJO
                 Data data=(Data) result;
                 Object model=data.getModel();
                 if(model!=null){
                     response.setContentType("application/json");
                     response.setCharacterEncoding("UTF-8");
-                    PrintWriter writer=response.getWriter();//
-                    String json=JsonUtil.toJson(model);
-                    writer.write(json);
-                    writer.flush();
+                    PrintWriter writer=response.getWriter();//输出流
+                    String json=JsonUtil.toJson(model);//将POJOe转为JSON格式
+                    writer.write(json);//
+                    writer.flush();//清空缓冲区
                     writer.close();
                 }
             }
