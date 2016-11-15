@@ -1,10 +1,7 @@
 package org.smart4j.framework;
 
 import org.smart4j.framework.annotation.Controller;
-import org.smart4j.framework.helper.BeanHelper;
-import org.smart4j.framework.helper.ClassHelper;
-import org.smart4j.framework.helper.ControllerHelper;
-import org.smart4j.framework.helper.IocHelper;
+import org.smart4j.framework.helper.*;
 import org.smart4j.framework.utils.ClassUtil;
 
 /**
@@ -19,6 +16,7 @@ public class HelperLoader {
         Class<?> [] classList={
                 ClassHelper.class,
                 BeanHelper.class,
+                AopHelper.class,//应比Ioc容器先加载
                 IocHelper.class,
                 ControllerHelper.class
         };

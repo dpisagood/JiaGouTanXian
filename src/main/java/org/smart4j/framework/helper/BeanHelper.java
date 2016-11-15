@@ -15,6 +15,7 @@ import java.util.Set;
  */
 public final class BeanHelper {
 
+    //存储class对象和它的实例化对象的映射
     private static final Map<Class<?>,Object> BEAN_MAP=new HashMap<Class<?>,Object>();
 
     static {//得到所有类的实例化对象和他们的Class对象,并映射到HashMap序列里
@@ -44,5 +45,14 @@ public final class BeanHelper {
             throw new RuntimeException("can not bean by class:" +cls);
         }
         return (T) BEAN_MAP.get(cls);
+    }
+
+    /**
+     * 设置Bean实例，这个方法是给在另外特殊加载器中加载的bean用的，他们也需要被设置到这个beanmap中
+     * @param cls
+     * @param obj
+     */
+    public static void setBean(Class<?> cls,Object obj){
+        BEAN_MAP.put(cls,obj);
     }
 }

@@ -65,4 +65,34 @@ public class ClassHelper {
         beanClassSet.addAll(getServiceClassSet());
         return beanClassSet;
     }
+
+    /**
+     * 获取应用包名下 某个 父类（或者接口）的所有子类（或者实现类）
+     * @param superClass
+     * @return
+     */
+    public static Set<Class<?>> getClassSetBySuper(Class<?> superClass){
+        Set<Class<?>> classSet=new HashSet<Class<?>>();
+        for (Class<?> cls:CLASS_SET){
+            if(superClass.isAssignableFrom(cls)&&!superClass.equals(cls)){
+                classSet.add(cls);
+            }
+        }
+        return classSet;
+    }
+
+    /**
+     * 获取应用包名下带有 某个注解 的所有类
+      * @param annotationClass
+     * @return
+     */
+    public static Set<Class<?>> getClassSetByAnnotation(Class<? extends Annotation> annotationClass){
+        Set<Class<?>> classSet=new HashSet<Class<?>>();
+        for (Class<?> cls:CLASS_SET){
+            if(cls.isAnnotationPresent(annotationClass)){
+                classSet.add(cls);
+            }
+        }
+        return classSet;
+    }
 }
