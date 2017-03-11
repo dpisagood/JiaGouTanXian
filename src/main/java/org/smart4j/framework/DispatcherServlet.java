@@ -56,7 +56,8 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String requestMethod =request.getMethod().toLowerCase();
-        //得到请求URL相对于Servlet配置的访问url的路径，比如本Servlet配置的访问url为“/*”则getPathInfo()得到的就是*和*后面的路径，但不包括参数
+        //得到请求URL相对于Servlet配置的访问url的路径，
+        //比如本Servlet配置的访问url为“/*”则getPathInfo()得到的就是*和*后面的路径，但不包括参数
         String requestPath=request.getPathInfo();
         //获取Action处理器
         Handler handler= ControllerHelper.getHandler(requestMethod,requestPath);
@@ -88,9 +89,14 @@ public class DispatcherServlet extends HttpServlet {
                 }
             }
             Param param=new Param(paramMap);
+            Object result;
             //调用Action方法
             Method actionMethod =handler.getActionMethod();
-            Object result= ReflectionUtil.invokeMethod(controllerBean,actionMethod,param);
+            if (param.isEmpty()){//如果参数为空
+                result=ReflectionUtil.invokeMethod(controllerBean,actionMethod);
+            }else {
+                result= ReflectionUtil.invokeMethod(controllerBean,actionMethod,param);
+            }
             //处理Action方法的返回值
             if(result instanceof View){
                 //返回JSP页面

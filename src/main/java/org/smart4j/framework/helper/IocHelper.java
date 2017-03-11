@@ -9,11 +9,11 @@ import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
- * Created by DP on 2016/10/27.
- */
-
-/**
  * 依赖注入助手类
+ * 通过遍历所有bean类与bean实例之间的映射(BeanMap)，分别取出Bean类与Bean实例，进而通过反射获取类中所有的成员变量。
+ * 继续遍历这些成员变量，在循环中判断当前成员变量是否带有Inject注解，若带有该注解，则从BeanMap中根据Bean类取出Bean实例
+ * 最后用ReflectionUtil#setField方法来修改当前成员变量的值，也就是注入实例
+ * Created by DP on 2016/10/27.
  */
 public final class IocHelper {
     static {
@@ -32,6 +32,7 @@ public final class IocHelper {
                     for (Field beanfield:beanFields){
                         if(beanfield.isAnnotationPresent(Inject.class)){//如果这个变量带有Inject注解的话
                             Class<?> beanFieldClass= beanfield.getType();
+                            //Object beanFieldInstance=ReflectionUtil.newInstance(beanFieldClass);//这样做不知道是否可以，这样每次注入的都是新的实例化对象
                             //通过它的Class对象在容器找到它的实例化对象
                             Object beanFieldInstance=beanMap.get(beanFieldClass);
                             if(beanFieldInstance!=null){

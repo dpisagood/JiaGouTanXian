@@ -6,11 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Action方法注解
- * Created by DP on 2016/10/27.
+ * 定义事务控制注解
+ * Created by DP on 2017/2/11.
  */
-@Target(ElementType.METHOD)//运用在方法级别的注解
+@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface  Action {
-    String value();//请求类型和路径
+public @interface Transaction{
 }

@@ -17,13 +17,10 @@ public abstract class AspectProxy  implements  Proxy{
     @Override
     public Object doProxy(ProxyChain proxyChain) throws Throwable {
         Object result=null;
-
         Class<?> cls=proxyChain.getTargetClass();
         Method method=proxyChain.getTargetMethod();
         Object[] params=proxyChain.getMethodParams();
-
         begin();
-
         try{
             if (intercept(cls,method,params)){
                 before(cls,method,params);

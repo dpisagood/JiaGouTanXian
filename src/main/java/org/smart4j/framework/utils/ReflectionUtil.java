@@ -13,7 +13,6 @@ import java.lang.reflect.Method;
  */
 public final class ReflectionUtil {
     private static final Logger LOGGER= LoggerFactory.getLogger(ReflectionUtil.class);
-
     /**
      * 创建实例
      * @param cls
@@ -31,7 +30,7 @@ public final class ReflectionUtil {
     }
 
     /**
-     * 调用方法
+     * 执行方法
      * @param obj
      * @param method
      * @param args
@@ -49,7 +48,6 @@ public final class ReflectionUtil {
         return result;
     }
 
-
     /**
      * 设置成员变量的值
      * @param obj
@@ -58,7 +56,7 @@ public final class ReflectionUtil {
      */
     public static void setField(Object obj, Field field, Object value){
         try {
-            field.setAccessible(true);
+            field.setAccessible(true);//设置操作权限
             field.set(obj,value);
         } catch (IllegalAccessException e) {
             e.printStackTrace();

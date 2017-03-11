@@ -17,7 +17,7 @@ public final class ArrayUtil {
     /**
      * 判断数组是否为空
      * @param array
-     * @return
+     * @return 空返回true
      */
     public static boolean isNotEmpty(Object[] array){
         return !ArrayUtil.isEmpty(array);

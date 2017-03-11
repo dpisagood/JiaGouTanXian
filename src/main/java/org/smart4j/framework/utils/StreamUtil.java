@@ -1,6 +1,5 @@
 package org.smart4j.framework.utils;
 
-import javafx.beans.binding.StringBinding;
 import org.slf4j.Logger;
 
 import java.io.*;

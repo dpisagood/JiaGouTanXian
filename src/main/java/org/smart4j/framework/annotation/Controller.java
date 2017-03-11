@@ -6,11 +6,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Created by DP on 2016/10/27
- */
-
-/**
  * 控制器注解
+ * Created by DP on 2016/10/27
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)

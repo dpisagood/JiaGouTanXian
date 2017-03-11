@@ -14,10 +14,10 @@ import java.util.*;
  * 方法拦截助手类
  * 分析:这个类初始化整个简单的AOP框架，使得整个切面逻辑可以在上下文应用
  * 但是整个AOP框架的功能缺陷很大，和Spring-AOP有很大的区别
- * spring aop中可以通过Aspect指示器实现更细粒度的拦截，如只拦截一个方法，
+ * spring aop中可以通过Aspect指示器实现更细粒度的拦截，如只拦截一个类中的一个方法。
  * 而且可以将任何一个简单的bean通过@Aspect变成切面类，此aop必须是AspectProxy的实现类才能使用@Aspect变为切面类
- * 并可以将任何一个普通的方法通过相应注解（如@Before）变成相应的通知，就是本书中所说的增强
- * 不用像这个类一样所有的通知被限制在抽象类AspectProxy中
+ * 并可以将切面类中任何一个的方法（除去构造器）通过相应注解（如@Before）变成相应的通知，就是本书中所说的增强
+ * 不用像这个简单的aop框架切面类必须继承抽象类AspectProxy，去实现事先定义好的通知具体看AspectProxy，
  * Created by DP on 2016/11/14.
  */
 public final class AopHelper {
@@ -25,8 +25,10 @@ public final class AopHelper {
 
     static {//初始化整个AOP框架
         try{
+            //获得切面类及其目标类集合之间的映射关系
             Map<Class<?>,Set<Class<?>>> proxyMap=createProxyMap();
-            Map<Class<?>,List<Proxy>> targetMap=createTargetMap(proxyMap);//得到目标类和拦截他的切面类集合的映射
+            //得到目标类和拦截他的切面类集合的映射
+            Map<Class<?>,List<Proxy>> targetMap=createTargetMap(proxyMap);
             for(Map.Entry<Class<?>,List<Proxy>> targetEntry :targetMap.entrySet()){//为目标类创建代理对象
                 Class<?> targetClass=targetEntry.getKey();
                 List<Proxy> proxyList=targetEntry.getValue();
@@ -55,7 +57,7 @@ public final class AopHelper {
     }
 
     /**
-     * 这个方法i用于获取切面类及其目标类集合之间的映射关系，一个切面类可以对应一个或者多个目标类
+     * 这个方法用于获取切面类及其目标类集合之间的映射关系，一个切面类可以对应一个或者多个目标类
      *
      * @return
      * @throws Exception

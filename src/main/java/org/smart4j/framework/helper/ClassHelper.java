@@ -9,9 +9,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * 类操作助手类
  * Created by DP on 2016/10/27.
  */
 public class ClassHelper {
+    /**
+     * 定义类集合（用于存放所加载的类）
+     */
     private static final Set<Class<?>> CLASS_SET;
 
     static {
@@ -26,7 +30,6 @@ public class ClassHelper {
     public static Set<Class<?>> getClassSet(){
         return CLASS_SET;
     }
-
 
     /**
      * 获取应用包名下的所有Service类
@@ -55,6 +58,7 @@ public class ClassHelper {
         }
         return classSet;
     }
+
     /**
      * 获取应用包名下的所有Bean类（包括：Service,Controller）
      * @return

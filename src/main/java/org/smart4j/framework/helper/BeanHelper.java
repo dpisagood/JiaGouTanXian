@@ -7,11 +7,8 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by DP on 2016/10/27.
- */
-
-/**
  * Bean助手类
+ * Created by DP on 2016/10/27.
  */
 public final class BeanHelper {
 

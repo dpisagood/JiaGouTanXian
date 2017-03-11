@@ -6,9 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 依赖注入注解
  * Created by DP on 2016/10/27.
  */
-@Target(ElementType.FIELD)
+@Target(ElementType.FIELD)//域
 @Retention(RetentionPolicy.RUNTIME)
 public @interface  Inject {
 }

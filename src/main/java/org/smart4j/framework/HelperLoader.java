@@ -5,11 +5,9 @@ import org.smart4j.framework.helper.*;
 import org.smart4j.framework.utils.ClassUtil;
 
 /**
- * Created by DP on 2016/10/28.
- */
-
-/**
+ * 初始化框架
  * 加载相应的Helper类
+ * Created by DP on 2016/10/28.
  */
 public class HelperLoader {
     public static void init(){

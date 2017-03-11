@@ -6,6 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ *服务类注解
  * Created by DP on 2016/10/27.
  */
 @Target(ElementType.TYPE)
