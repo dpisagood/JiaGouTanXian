@@ -275,6 +275,9 @@ public class DatabaseHelper {
         }
     }
 
+    /**
+     * 回滚事务
+     */
     public static void rollbackTransaction(){
         Connection conn=getConnection();
         if (conn!=null){

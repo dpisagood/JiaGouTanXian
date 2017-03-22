@@ -54,7 +54,8 @@ public class DispatcherServlet extends HttpServlet {
 
 
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void service(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String requestMethod =request.getMethod().toLowerCase();
         //得到请求URL相对于Servlet配置的访问url的路径，
         //比如本Servlet配置的访问url为“/*”则getPathInfo()得到的就是*和*后面的路径，但不包括参数

@@ -14,7 +14,7 @@ import java.util.Set;
 /**
  * 初始化Request和Handler之间的对应关系，请求中有请求url和请求方法，
  * handler中有对应处理这个请求的控制器和对应的action方法
- * 在转发器中的得到用户的请求url和请求方法method后可以实例化一个Requestl类，
+ * 在转发器中的得到用户的请求url和请求方法method后可以实例化一个Request类，
  * 然后通过这个对应关系找到相应handler然后进行处理
  * Created by DP on 2016/10/27.
  */

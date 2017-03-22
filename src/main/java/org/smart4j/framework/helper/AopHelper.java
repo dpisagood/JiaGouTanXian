@@ -3,9 +3,11 @@ package org.smart4j.framework.helper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.smart4j.framework.annotation.Aspect;
+import org.smart4j.framework.annotation.Transaction;
 import org.smart4j.framework.proxy.AspectProxy;
 import org.smart4j.framework.proxy.Proxy;
 import org.smart4j.framework.proxy.ProxyManager;
+import org.smart4j.framework.proxy.TransactionProxy;
 
 import java.lang.annotation.Annotation;
 import java.util.*;
@@ -57,13 +59,23 @@ public final class AopHelper {
     }
 
     /**
-     * 这个方法用于获取切面类及其目标类集合之间的映射关系，一个切面类可以对应一个或者多个目标类
-     *
+     * 得到类中切面类与他们所需要代理的目标类的映射集合。用于为他们创建代理对象
      * @return
      * @throws Exception
      */
     private static Map<Class<?>,Set<Class<?>>> createProxyMap() throws Exception{
         Map<Class<?>,Set<Class<?>>> proxyMap=new HashMap<Class<?>,Set<Class<?>>>();
+        addAspectProxy(proxyMap);
+        addTransactionProxy(proxyMap);
+        return proxyMap;
+    }
+
+    /**
+     * 这个方法用于获取切面类及其目标类集合之间的映射关系，一个切面类可以对应一个或者多个目标类
+     * @param proxyMap
+     * @throws Exception
+     */
+    private static void addAspectProxy(Map<Class<?>,Set<Class<?>>> proxyMap)throws Exception{
         //得到AspectProxy抽象类的所有子类和实现类Class对象集合
         Set<Class<?>> proxyClassSet=ClassHelper.getClassSetBySuper(AspectProxy.class);
         for(Class<?> proxyClass:proxyClassSet){
@@ -71,12 +83,25 @@ public final class AopHelper {
             if(proxyClass.isAnnotationPresent(Aspect.class)){
                 Aspect aspect=proxyClass.getAnnotation(Aspect.class);//得到这个类中@Aspect注解对象
                 //调用createTargetClassSet方法得到所有目标类对象
-                Set<Class<?>> targetClassASet=createTargetClassSet(aspect);
+                Set<Class<?>> targetClassASet= null;
+                targetClassASet = createTargetClassSet(aspect);//所有带有这个切面类注解的目标类集合
                 proxyMap.put(proxyClass,targetClassASet);//添加切面类与目标类集合之间的映射关系
             }
         }
-        return proxyMap;
     }
+
+    /**
+     *  创建事务管理代理类和目标对象集合（也就是类中某个方法可能需要需要事务管理的类）
+     *  我们在service类中也就是有@service的类中添加需要事务管理带有@Transaction的方法，当这些方法被执行时就会被
+     *  代理类拦截，添加事务管理，详见AspectProxy类
+     * @param proxyMap
+     */
+    private static void addTransactionProxy(Map<Class<?>,Set<Class<?>>> proxyMap){
+        Set<Class<?>> serviceClassSet=ClassHelper.getServiceClassSet();
+        proxyMap.put(TransactionProxy.class,serviceClassSet);
+
+    }
+
 
     /**
      * 这个方法用于得到目标类与切面类的对象集合的映射关系，
